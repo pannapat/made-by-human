@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Provenance · Certified Human-Made Finance · 2036</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EFE2;
+    --paper-deep:#E7DFC8;
+    --card:#FBF8EF;
+    --ink:#223D2E;
+    --ink-soft:#54685B;
+    --rule:#CFC5A6;
+    --stamp:#2D4FA1;
+    --stamp-soft:#8DA0D6;
+    --carbon:#8A6A12;
+    --machine:#6E6E64;
+    --gold:#9C7C2C;
+    --danger:#B04040;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Archivo',system-ui,sans-serif;
+    background:var(--paper-deep);
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(34,61,46,.035) 0 1px, transparent 1px 28px);
+  }
+  .phone{
+    width:100%;max-width:430px;min-height:100vh;
+    background:var(--paper);
+    border-left:1px solid var(--rule);border-right:1px solid var(--rule);
+    position:relative;padding-bottom:96px;
+  }
+
+  /* ---- header ---- */
+  header{padding:22px 20px 14px;border-bottom:2px solid var(--ink)}
+  .statusline{
+    display:flex;justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;letter-spacing:.08em;color:var(--ink-soft);
+    margin-bottom:16px;text-transform:uppercase;
+  }
+  .brand{font-family:'Young Serif',serif;font-size:34px;line-height:1;letter-spacing:.01em}
+  .brand small{
+    display:block;font-family:'Archivo',sans-serif;
+    font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-soft);margin-top:7px;
+  }
+
+  /* ---- filter bar ---- */
+  .filterbar{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 20px;border-bottom:1px solid var(--rule);background:var(--card);
+  }
+  .filterlabel{font-size:13.5px;font-weight:600}
+  .filterlabel span{display:block;font-weight:400;font-size:11.5px;color:var(--ink-soft);margin-top:2px}
+  .switch{
+    position:relative;width:56px;height:30px;flex:none;
+    background:#D9D2BB;border:1.5px solid var(--ink);border-radius:30px;
+    cursor:pointer;transition:background .25s;
+  }
+  .switch::after{
+    content:"";position:absolute;top:2.5px;left:3px;width:21px;height:21px;
+    border-radius:50%;background:var(--paper);border:1.5px solid var(--ink);transition:transform .25s;
+  }
+  .switch[aria-checked="true"]{background:var(--ink)}
+  .switch[aria-checked="true"]::after{transform:translateX(25px)}
+  .switch:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+  .shelfnote{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;letter-spacing:.06em;color:var(--ink-soft);
+    padding:10px 20px 0;text-transform:uppercase;
+  }
+
+  /* ---- product cards ---- */
+  .shelf{padding:10px 14px 20px;display:flex;flex-direction:column;gap:14px}
+  .prod{
+    background:var(--card);border:1.5px solid var(--ink);border-radius:3px;
+    padding:16px 16px 13px;position:relative;cursor:pointer;
+    text-align:left;width:100%;font:inherit;color:inherit;transition:transform .15s;
+  }
+  .prod:active{transform:scale(.985)}
+  .prod:focus-visible{outline:3px solid var(--stamp);outline-offset:3px}
+  .prod.machine{border-style:dashed;border-color:var(--machine);color:var(--machine);background:transparent}
+  .prod .row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .pname{font-family:'Young Serif',serif;font-size:20px;line-height:1.15;max-width:230px}
+  .pbank{font-size:12.5px;color:var(--ink-soft);margin-top:4px}
+  .prod.machine .pbank{color:var(--machine)}
+  .prate{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:500;white-space:nowrap}
+  .prate small{display:block;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);text-align:right;margin-top:2px}
+  .prod.machine .prate small{color:var(--machine)}
+  .pmeta{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-top:13px;padding-top:11px;border-top:1px solid var(--rule);gap:10px;
+  }
+  .prod.machine .pmeta{border-top-color:#C9C4B2}
+  .carbonline{font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;color:var(--carbon)}
+  .prod.machine .carbonline{color:var(--machine)}
+  .tierchip{
+    flex:none;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    border:1.5px solid currentColor;border-radius:2px;padding:4px 7px;
+  }
+  .tier-gold{color:var(--gold)}
+  .tier-human{color:var(--ink)}
+  .tier-led{color:var(--stamp)}
+  .tier-ai{color:var(--machine)}
+  .sealmini{position:absolute;top:-11px;right:14px;width:46px;height:46px;pointer-events:none}
+  .unlabeled-note{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;margin-top:8px;color:var(--machine)}
+
+  /* ---- passport modal ---- */
+  .scrim{
+    position:fixed;inset:0;background:rgba(34,61,46,.45);
+    display:none;justify-content:center;align-items:flex-end;z-index:50;
+  }
+  .scrim.open{display:flex}
+  .passport{
+    width:100%;max-width:430px;max-height:88vh;overflow-y:auto;
+    background:var(--card);border:2px solid var(--ink);border-bottom:none;
+    border-radius:10px 10px 0 0;padding:20px 20px 34px;
+    position:relative;animation:rise .3s ease-out;
+  }
+  @keyframes rise{from{transform:translateY(40px);opacity:.4}to{transform:none;opacity:1}}
+  .pass-eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .pass-title{font-family:'Young Serif',serif;font-size:26px;margin-top:6px;line-height:1.15;max-width:250px}
+  .pass-bank{font-size:13px;color:var(--ink-soft);margin-top:5px}
+  .closebtn{
+    position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;
+    border:1.5px solid var(--ink);background:var(--paper);font-size:16px;line-height:1;
+    cursor:pointer;color:var(--ink);
+  }
+  .closebtn:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+  .stampzone{display:flex;justify-content:center;margin:8px 0 4px;min-height:150px;align-items:center}
+  .bigseal{width:148px;height:148px}
+  .stamped .bigseal{animation:stampdown .45s cubic-bezier(.2,1.4,.4,1)}
+  @keyframes stampdown{
+    0%{transform:scale(1.9) rotate(-14deg);opacity:0}
+    60%{transform:scale(.94) rotate(-7deg);opacity:1}
+    100%{transform:scale(1) rotate(-8deg);opacity:1}
+  }
+  .bigseal svg{transform:rotate(-8deg)}
+  .pass-grid{border-top:1.5px solid var(--ink)}
+  .pass-row{
+    display:flex;justify-content:space-between;gap:14px;
+    padding:10px 2px;border-bottom:1px solid var(--rule);font-size:13px;
+  }
+  .pass-row dt{color:var(--ink-soft);flex:none}
+  .pass-row dd{font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right}
+  .sect{margin-top:20px}
+  .sect h3{
+    font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:9px;
+  }
+  .maker{
+    display:flex;justify-content:space-between;gap:12px;
+    padding:8px 0;border-bottom:1px dashed var(--rule);font-size:13.5px;
+  }
+  .maker span{color:var(--ink-soft);font-size:12px}
+  .maker .hrs{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink);flex:none}
+  .carbonpanel{border:1.5px solid var(--carbon);border-radius:3px;padding:13px 14px;margin-top:4px}
+  .carbonpanel h4{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--carbon);margin-bottom:9px}
+  .cnum{font-family:'IBM Plex Mono',monospace;display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:5px 0}
+  .cnum b{font-weight:500}
+  .cnote{font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.5}
+  .verify{
+    margin-top:22px;width:100%;background:var(--ink);color:var(--paper);
+    border:none;border-radius:3px;font:600 14px 'Archivo',sans-serif;
+    letter-spacing:.04em;padding:14px;cursor:pointer;
+  }
+  .verify:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+  .registry-ok{display:none;margin-top:10px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--stamp)}
+  .registry-ok.show{display:block}
+
+  /* ---- book consultation button (in passport) ---- */
+  .book-consult-btn{
+    margin-top:10px;width:100%;
+    background:transparent;color:var(--stamp);
+    border:1.5px solid var(--stamp);border-radius:3px;
+    font:600 13.5px 'Archivo',sans-serif;letter-spacing:.04em;
+    padding:13px;cursor:pointer;display:none;
+    transition:background .15s;
+  }
+  .book-consult-btn.visible{display:block}
+  .book-consult-btn:hover{background:rgba(45,79,161,.08)}
+  .book-consult-btn:active{background:rgba(45,79,161,.15)}
+  .book-consult-btn:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+
+  /* ---- booking modal scrim ---- */
+  .book-scrim{
+    position:fixed;inset:0;background:rgba(34,61,46,.65);
+    display:none;justify-content:center;align-items:flex-end;z-index:60;
+  }
+  .book-scrim.open{display:flex}
+  .book-modal{
+    width:100%;max-width:430px;max-height:92vh;overflow-y:auto;
+    background:var(--card);
+    border:2px solid var(--stamp);border-bottom:none;
+    border-radius:10px 10px 0 0;
+    padding:22px 20px 44px;
+    position:relative;animation:rise .3s ease-out;
+  }
+  .book-closebtn{
+    position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;
+    border:1.5px solid var(--stamp);background:var(--paper);font-size:16px;line-height:1;
+    cursor:pointer;color:var(--stamp);display:flex;align-items:center;justify-content:center;
+  }
+  .book-closebtn:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+
+  /* mandate notice */
+  .mandate-notice{
+    margin-top:14px;
+    background:rgba(45,79,161,.06);
+    border-left:3px solid var(--stamp);
+    padding:9px 12px;
+    font-size:11.5px;color:var(--stamp);line-height:1.55;
+  }
+  .mandate-notice strong{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+
+  /* section heads */
+  .book-head{
+    font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-soft);margin:20px 0 9px;
+  }
+  .book-head:first-of-type{margin-top:18px}
+
+  /* advisor card */
+  .advisor-card{
+    display:flex;align-items:center;gap:14px;
+    padding:12px 14px;border:1.5px solid var(--rule);border-radius:3px;
+    background:var(--paper);
+  }
+  .advisor-avatar{
+    width:46px;height:46px;border-radius:50%;
+    background:var(--stamp);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Young Serif',serif;font-size:17px;flex:none;
+    letter-spacing:.01em;
+  }
+  .advisor-name{font-weight:600;font-size:14px}
+  .advisor-meta{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);margin-top:3px}
+  .advisor-status{
+    display:inline-flex;align-items:center;gap:5px;
+    font-size:10.5px;font-family:'IBM Plex Mono',monospace;
+    color:#3A7D44;margin-top:5px;
+  }
+  .advisor-status::before{
+    content:"";display:block;width:7px;height:7px;border-radius:50%;background:#3A7D44;
+  }
+
+  /* date grid */
+  .date-grid{display:flex;flex-wrap:wrap;gap:7px}
+  .datechip{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    padding:7px 9px;border:1.5px solid var(--rule);border-radius:3px;
+    background:var(--paper);cursor:pointer;color:var(--ink);
+    transition:border-color .12s,background .12s;text-align:center;min-width:60px;
+  }
+  .datechip:hover{border-color:var(--stamp)}
+  .datechip.selected{background:var(--stamp);color:var(--paper);border-color:var(--stamp)}
+  .datechip .day-abbr{display:block;font-size:9px;opacity:.65;margin-bottom:2px;text-transform:uppercase}
+
+  /* time grid */
+  .time-grid{display:flex;flex-wrap:wrap;gap:7px}
+  .timechip{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;
+    padding:8px 14px;border:1.5px solid var(--rule);border-radius:3px;
+    background:var(--paper);cursor:pointer;color:var(--ink);
+    transition:border-color .12s,background .12s;
+  }
+  .timechip:hover{border-color:var(--stamp)}
+  .timechip.selected{background:var(--stamp);color:var(--paper);border-color:var(--stamp)}
+
+  /* consultation type grid */
+  .type-grid{display:flex;flex-wrap:wrap;gap:7px}
+  .typechip{
+    font-size:13px;padding:8px 14px;
+    border:1.5px solid var(--rule);border-radius:3px;
+    background:var(--paper);cursor:pointer;color:var(--ink);
+    transition:border-color .12s,background .12s;
+  }
+  .typechip:hover{border-color:var(--stamp)}
+  .typechip.selected{background:var(--stamp);color:var(--paper);border-color:var(--stamp)}
+
+  /* confirm button (in booking modal) */
+  .book-confirm-btn{
+    margin-top:22px;width:100%;
+    background:var(--stamp);color:var(--paper);
+    border:none;border-radius:3px;
+    font:600 14px 'Archivo',sans-serif;letter-spacing:.04em;
+    padding:14px;cursor:pointer;opacity:.35;
+    transition:opacity .2s;
+  }
+  .book-confirm-btn.ready{opacity:1}
+  .book-confirm-btn:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+  .book-error{
+    margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    color:var(--danger);text-align:center;display:none;
+  }
+  .book-error.show{display:block}
+
+  /* ---- confirmation screen ---- */
+  .confirm-screen{padding:4px 0 8px}
+  .confirm-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--ink);color:var(--paper);
+    font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:.13em;text-transform:uppercase;
+    padding:7px 14px;border-radius:2px;margin-bottom:16px;
+  }
+  .confirm-tick{
+    width:18px;height:18px;background:var(--paper);border-radius:50%;
+    color:var(--ink);display:inline-flex;align-items:center;justify-content:center;
+    font-size:11px;flex:none;
+  }
+  .confirm-ref-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);
+    margin-bottom:4px;
+  }
+  .confirm-ref{
+    font-family:'Young Serif',serif;font-size:30px;color:var(--stamp);
+    letter-spacing:.02em;margin-bottom:4px;
+  }
+  .confirm-desc{font-size:12px;color:var(--ink-soft);line-height:1.6;margin-bottom:4px}
+  .confirm-rows{border-top:1.5px solid var(--ink);margin-top:18px}
+  .confirm-row{
+    display:flex;justify-content:space-between;gap:14px;
+    padding:10px 2px;border-bottom:1px solid var(--rule);font-size:13px;
+  }
+  .confirm-row dt{color:var(--ink-soft);flex:none}
+  .confirm-row dd{font-family:'IBM Plex Mono',monospace;font-size:12px;text-align:right;word-break:break-word;max-width:220px}
+  .confirm-done-btn{
+    margin-top:22px;width:100%;background:var(--ink);color:var(--paper);
+    border:none;border-radius:3px;font:600 14px 'Archivo',sans-serif;
+    letter-spacing:.04em;padding:14px;cursor:pointer;
+  }
+  .confirm-done-btn:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+  .confirm-cal-note{
+    margin-top:12px;text-align:center;font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;color:var(--ink-soft);letter-spacing:.05em;
+  }
+
+  footer{
+    position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+    width:100%;max-width:430px;background:var(--ink);color:var(--paper);
+    padding:12px 20px;font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:.07em;display:flex;justify-content:space-between;
+    text-transform:uppercase;z-index:10;
+  }
+  /* ---- AI "get" button (in passport, machine products only) ---- */
+  .get-ai-btn{
+    margin-top:10px;width:100%;
+    background:transparent;color:var(--machine);
+    border:1.5px dashed var(--machine);border-radius:3px;
+    font:600 13.5px 'Archivo',sans-serif;letter-spacing:.04em;
+    padding:13px;cursor:pointer;display:none;
+    transition:background .15s;
+  }
+  .get-ai-btn.visible{display:block}
+  .get-ai-btn:hover{background:rgba(110,110,100,.07)}
+  .get-ai-btn:focus-visible{outline:3px solid var(--machine);outline-offset:2px}
+
+  /* ---- AI flow modal ---- */
+  .ai-scrim{
+    position:fixed;inset:0;background:rgba(20,20,20,.72);
+    display:none;justify-content:center;align-items:flex-end;z-index:60;
+  }
+  .ai-scrim.open{display:flex}
+  .ai-modal{
+    width:100%;max-width:430px;max-height:88vh;overflow-y:auto;
+    background:#1A1A18;
+    border:1px solid #444;border-bottom:none;
+    border-radius:10px 10px 0 0;
+    padding:22px 20px 44px;
+    position:relative;animation:rise .25s ease-out;
+    color:#C8C4B2;
+  }
+  .ai-closebtn{
+    position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;
+    border:1px solid #555;background:transparent;font-size:16px;line-height:1;
+    cursor:pointer;color:#888;display:flex;align-items:center;justify-content:center;
+  }
+  .ai-closebtn:focus-visible{outline:3px solid #666;outline-offset:2px}
+  .ai-eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:.18em;text-transform:uppercase;color:#555;margin-bottom:6px;
+  }
+  .ai-title{
+    font-family:'Young Serif',serif;font-size:22px;color:#E8E4D4;
+    margin-bottom:4px;line-height:1.2;
+  }
+  .ai-sub{font-size:12px;color:#666;margin-bottom:0}
+
+  /* progress bar */
+  .ai-progress-wrap{margin:22px 0 8px}
+  .ai-progress-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    color:#666;margin-bottom:7px;display:flex;justify-content:space-between;
+  }
+  .ai-progress-track{
+    height:3px;background:#2A2A28;border-radius:2px;overflow:hidden;
+  }
+  .ai-progress-bar{
+    height:100%;width:0;background:#6E6E64;border-radius:2px;
+    transition:width .18s linear;
+  }
+  /* log terminal */
+  .ai-log{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+    color:#4A4A42;line-height:1.85;margin:14px 0;
+    min-height:120px;
+  }
+  .ai-log .line{color:#6E6E64;display:block}
+  .ai-log .line.active{color:#9A9A8E}
+  .ai-log .line.done{color:#4A4A42}
+  .ai-log .line.warn{color:#8A6A12}
+  .ai-log .cursor{
+    display:inline-block;width:6px;height:1em;background:#6E6E64;
+    vertical-align:middle;animation:blink .75s step-end infinite;margin-left:3px;
+  }
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+  /* disclosure block */
+  .ai-disclosure{
+    border:1px dashed #3A3A38;border-radius:3px;
+    padding:11px 13px;margin:14px 0;
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    color:#555;line-height:1.6;
+  }
+  .ai-disclosure strong{display:block;color:#6E6E64;margin-bottom:5px;
+    font-size:9.5px;letter-spacing:.14em;text-transform:uppercase}
+
+  /* accept button */
+  .ai-accept-btn{
+    margin-top:20px;width:100%;
+    background:#3A3A36;color:#C8C4B2;
+    border:1px solid #555;border-radius:3px;
+    font:600 13.5px 'Archivo',sans-serif;letter-spacing:.04em;
+    padding:13px;cursor:pointer;opacity:0;transition:opacity .4s;
+    display:block;
+  }
+  .ai-accept-btn.show{opacity:1}
+  .ai-accept-btn:hover{background:#4A4A44}
+  .ai-accept-btn:focus-visible{outline:3px solid #666;outline-offset:2px}
+
+  /* approved screen */
+  .ai-approved{padding:4px 0 8px}
+  .ai-approved-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:#2A2A28;color:#9A9A8E;
+    font-family:'IBM Plex Mono',monospace;font-size:10px;
+    letter-spacing:.13em;text-transform:uppercase;
+    padding:7px 14px;border-radius:2px;margin-bottom:16px;border:1px solid #3A3A38;
+  }
+  .ai-ref-label{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+    letter-spacing:.1em;text-transform:uppercase;color:#555;margin-bottom:4px;
+  }
+  .ai-ref{
+    font-family:'Young Serif',serif;font-size:30px;color:#8E8E84;
+    letter-spacing:.02em;margin-bottom:4px;
+  }
+  .ai-confirm-desc{font-size:12px;color:#555;line-height:1.6;margin-bottom:4px}
+  .ai-confirm-rows{border-top:1px solid #2A2A28;margin-top:18px}
+  .ai-confirm-row{
+    display:flex;justify-content:space-between;gap:14px;
+    padding:10px 2px;border-bottom:1px solid #2A2A28;font-size:12.5px;
+  }
+  .ai-confirm-row dt{color:#555;flex:none;font-size:12px}
+  .ai-confirm-row dd{font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    color:#9A9A8E;text-align:right;word-break:break-word;max-width:230px}
+  .ai-done-btn{
+    margin-top:20px;width:100%;background:#2A2A28;color:#9A9A8E;
+    border:1px solid #555;border-radius:3px;font:600 13.5px 'Archivo',sans-serif;
+    letter-spacing:.04em;padding:13px;cursor:pointer;
+  }
+  .ai-done-btn:hover{background:#3A3A36}
+  .ai-done-btn:focus-visible{outline:3px solid #666;outline-offset:2px}
+  .ai-footnote{
+    margin-top:14px;text-align:center;font-family:'IBM Plex Mono',monospace;
+    font-size:10px;color:#444;letter-spacing:.04em;line-height:1.6;
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    .stamped .bigseal,.passport,.book-modal{animation:none}
+    .switch,.switch::after,.prod,.datechip,.timechip,.typechip{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <header>
+    <div class="statusline"><span>Tue 14 Apr 2036 · 07:41</span><span>ButterCup</span></div>
+    <h1 class="brand">Provenance<small>The certified finance marketplace</small></h1>
+  </header>
+
+  <div class="filterbar">
+    <div class="filterlabel" id="filterlabel">Human-made only
+      <span>Hide products built by autonomous agents</span>
+    </div>
+    <div class="switch" role="switch" aria-checked="false" aria-labelledby="filterlabel" tabindex="0" id="toggle"></div>
+  </div>
+
+  <p class="shelfnote" id="shelfnote"></p>
+  <div class="shelf" id="shelf"></div>
+  <p style="padding:0 20px 30px;font-size:11px;color:var(--ink-soft);line-height:1.6">
+    Seals are licensed marks of the Human Finance Certification Authority (HFCA), an independent
+    certifier chartered 2032. Products without a seal are presumed machine-made and must disclose
+    compute carbon under the 2033 Provenance Accord. Tap any product to open its Provenance Passport.
+  </p>
+</div>
+
+<!-- ======= PASSPORT MODAL ======= -->
+<div class="scrim" id="scrim">
+  <div class="passport" role="dialog" aria-modal="true" aria-labelledby="passTitle" id="passport">
+    <button class="closebtn" id="closebtn" aria-label="Close passport">✕</button>
+    <p class="pass-eyebrow">Provenance Passport</p>
+    <h2 class="pass-title" id="passTitle"></h2>
+    <p class="pass-bank" id="passBank"></p>
+    <div class="stampzone" id="stampzone"></div>
+    <dl class="pass-grid" id="passGrid"></dl>
+    <div class="sect" id="makersSect">
+      <h3 id="makersHead"></h3>
+      <div id="makers"></div>
+    </div>
+    <div class="sect">
+      <h3>Compute carbon panel</h3>
+      <div class="carbonpanel" id="carbonPanel"></div>
+    </div>
+    <button class="verify" id="verifyBtn">Verify in the public HFCA registry</button>
+    <p class="registry-ok" id="registryOk">✓ Registry match · certificate active · last audit passed</p>
+    <button class="book-consult-btn" id="bookBtn" aria-label="Book mandatory human consultation">
+      📋 Book mandatory human consultation
+    </button>
+    <button class="get-ai-btn" id="getAiBtn" aria-label="Get Pulse Instant Credit">
+      ⚡ Get — instant decision, no humans involved
+    </button>
+  </div>
+</div>
+
+<!-- ======= AI FLOW MODAL ======= -->
+<div class="ai-scrim" id="aiScrim" role="dialog" aria-modal="true" aria-labelledby="aiModalTitle">
+  <div class="ai-modal" id="aiModal">
+    <button class="ai-closebtn" id="aiClosebtn" aria-label="Close">✕</button>
+    <div id="aiContent"></div>
+  </div>
+</div>
+
+<!-- ======= BOOKING MODAL ======= -->
+<div class="book-scrim" id="bookScrim" role="dialog" aria-modal="true" aria-labelledby="bookModalTitle">
+  <div class="book-modal" id="bookModal">
+    <button class="book-closebtn" id="bookClosebtn" aria-label="Close booking">✕</button>
+    <div id="bookContent"></div>
+  </div>
+</div>
+
+<footer><span>HFCA seal directory</span><span>Report human-washing</span></footer>
+
+<script>
+/* ================================================
+   SEAL SVG GENERATOR
+   ================================================ */
+const seal = (color, inner, size) => `
+<svg viewBox="0 0 120 120" width="${size}" height="${size}" aria-hidden="true">
+  <defs>
+    <path id="cir${size}${inner.replace(/\W/g,'')}" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/>
+  </defs>
+  <circle cx="60" cy="60" r="57" fill="none" stroke="${color}" stroke-width="2.5"/>
+  <circle cx="60" cy="60" r="34" fill="none" stroke="${color}" stroke-width="1.5"/>
+  <text fill="${color}" font-family="'IBM Plex Mono',monospace" font-size="8.5" letter-spacing="0.9">
+    <textPath href="#cir${size}${inner.replace(/\W/g,'')}">HFCA · CERTIFIED · HUMAN FINANCE · EST. 2032</textPath>
+  </text>
+  <text x="60" y="55" text-anchor="middle" fill="${color}" font-family="'Young Serif',serif" font-size="13">${inner.split('|')[0]}</text>
+  <text x="60" y="71" text-anchor="middle" fill="${color}" font-family="'Young Serif',serif" font-size="13">${inner.split('|')[1]||''}</text>
+</svg>`;
+
+/* ================================================
+   PRODUCT DATA
+   ================================================ */
+const products = [
+  {
+    id:'slow', tier:'gold', tierLabel:'100% Human-Made',
+    name:'The Slow Mortgage', bank:'Alpenrose Mutual · Trondheim',
+    rate:'4.10%', rateNote:'25-yr fixed',
+    carbon:'0 g compute CO₂e · 62 labor-hrs',
+    cert:'HM-2036-00417', since:'Certified since 2033', audit:'Audit 02 Mar 2036 · passed',
+    liability:'Author of record: E. Brandt, lic. 4471',
+    makers:[
+      ['Elin Brandt','Product lead','19 h'],['Jonas Meland','Credit economist','11 h'],
+      ['Sofie Aas','Credit economist','9 h'],['Peter Krogh','Conduct lawyer','6 h'],
+      ['Maja Lindqvist','Plain-language writer','5 h'],['Ingrid Solheim +3','Regional advisors','12 h'],
+    ],
+    carbonRows:[['Compute CO₂e / decision','0 g'],['Category avg. (AI-made)','1,180 g'],['Human labor funded','62 h / 9 makers']],
+    carbonNote:'No generative or agentic systems at any stage, incl. servicing. Every account funds ongoing human advisory work.'
+  },
+  {
+    id:'harvest', tier:'human', tierLabel:'Human-Made · 95%',
+    name:'Harvest Savings', bank:'Göta Cooperative Bank · Gothenburg',
+    rate:'3.35%', rateNote:'APY, variable',
+    carbon:'4 g compute CO₂e · 28 labor-hrs',
+    cert:'HM-2036-01102', since:'Certified since 2034', audit:'Audit 19 Jan 2036 · passed',
+    liability:'Author of record: R. Ekström, lic. 5209',
+    makers:[
+      ['Rut Ekström','Product lead','14 h'],['Ali Rezai','Pricing analyst','8 h'],
+      ['Klara Nilsson','Member advocate','6 h'],
+    ],
+    carbonRows:[['Compute CO₂e / account','4 g'],['Category avg. (AI-made)','610 g'],['Human labor funded','28 h / 3 makers']],
+    carbonNote:'AI limited to back-office translation and scheduling. All design, pricing and advice decisions human-authored.'
+  },
+  {
+    id:'meridian', tier:'led', tierLabel:'Human-Led',
+    name:'Meridian Flex Loan', bank:'Meridian Bank · Amsterdam',
+    rate:'5.65%', rateNote:'APR, flexible',
+    carbon:'340 g compute CO₂e / decision',
+    cert:'HL-2036-00088', since:'Certified since 2035', audit:'Audit 11 Feb 2036 · passed',
+    liability:'Author of record: D. Visser, lic. 7731',
+    makers:[
+      ['Daan Visser','Accountable author','7 h'],['Lea Fontaine','Risk reviewer','4 h'],
+    ],
+    carbonRows:[['Compute CO₂e / decision','340 g'],['Category avg. (AI-made)','1,180 g'],['Human labor funded','11 h / 2 makers']],
+    carbonNote:'Agents draft analysis and terms; a named human can reconstruct and explain every decision and carries liability for it.'
+  },
+  {
+    id:'pulse', tier:'ai', tierLabel:'AI-Made · No seal',
+    name:'Pulse Instant Credit', bank:'Autonomous product · Pulse Financial Agents',
+    rate:'3.70%', rateNote:'APR, repriced hourly',
+    carbon:'1.2 kg compute CO₂e / decision',
+    machine:true,
+    cert:'—', since:'Uncertified', audit:'Provenance Accord auto-disclosure',
+    liability:'No human author of record',
+    makers:[],
+    carbonRows:[['Compute CO₂e / decision','1,200 g'],['Model training share','includes 310 g'],['Human labor funded','0 h / 0 makers']],
+    carbonNote:'Mandatory disclosure under the 2033 Provenance Accord. Product terms may change without human review. Avg. product lifespan: 41 days.'
+  },
+];
+
+/* ================================================
+   ADVISOR DATA (per product id)
+   ================================================ */
+const advisorData = {
+  slow:     { name:'Ingrid Solheim',  role:'Regional advisor',    lic:'HFCA lic. IS-4412', initials:'IS',
+              note:'Certified mortgage advisor, Alpenrose Mutual. 14 years in human advisory.'},
+  harvest:  { name:'Klara Nilsson',   role:'Member advocate',     lic:'HFCA lic. KN-5501', initials:'KN',
+              note:'Member services specialist, Göta Cooperative Bank. 9 years in cooperative banking.'},
+  meridian: { name:'Daan Visser',     role:'Accountable author',  lic:'HFCA lic. DV-7731', initials:'DV',
+              note:'Loan architect & liability holder, Meridian Bank. HFCA Human-Led specialist.'},
+};
+
+/* ================================================
+   SHELF RENDER
+   ================================================ */
+const shelf  = document.getElementById('shelf');
+const shelfnote = document.getElementById('shelfnote');
+const toggle = document.getElementById('toggle');
+let humanOnly = false;
+
+const chipClass  = {gold:'tier-gold',human:'tier-human',led:'tier-led',ai:'tier-ai'};
+const sealColor  = {gold:'#9C7C2C',human:'#223D2E',led:'#2D4FA1'};
+const sealInner  = {gold:'100%|HUMAN',human:'HUMAN|MADE',led:'HUMAN|LED'};
+
+function render(){
+  const shown = products.filter(p => !humanOnly || !p.machine);
+  shelfnote.textContent = `Shelf · ${shown.length} of ${products.length} products shown${humanOnly?' · human-made filter on':''}`;
+  shelf.innerHTML = '';
+  shown.forEach(p=>{
+    const b = document.createElement('button');
+    b.className = 'prod' + (p.machine?' machine':'');
+    b.innerHTML = `
+      ${p.machine?'': `<span class="sealmini">${seal(sealColor[p.tier], sealInner[p.tier], 46)}</span>`}
+      <div class="row">
+        <div><div class="pname">${p.name}</div><div class="pbank">${p.bank}</div></div>
+        <div class="prate">${p.rate}<small>${p.rateNote}</small></div>
+      </div>
+      <div class="pmeta">
+        <div class="carbonline">${p.carbon}</div>
+        <div class="tierchip ${chipClass[p.tier]}">${p.tierLabel}</div>
+      </div>
+      ${p.machine?'<div class="unlabeled-note">Presumed machine-made · mandatory disclosure</div>':''}`;
+    b.addEventListener('click',()=>openPassport(p));
+    shelf.appendChild(b);
+  });
+}
+function setToggle(v){
+  humanOnly=v;
+  toggle.setAttribute('aria-checked',String(v));
+  render();
+}
+toggle.addEventListener('click',()=>setToggle(!humanOnly));
+toggle.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();setToggle(!humanOnly);}});
+
+/* ================================================
+   PASSPORT MODAL
+   ================================================ */
+const scrim      = document.getElementById('scrim');
+const stampzone  = document.getElementById('stampzone');
+const registryOk = document.getElementById('registryOk');
+const bookBtn    = document.getElementById('bookBtn');
+let currentProduct = null;
+
+function openPassport(p){
+  currentProduct = p;
+  document.getElementById('passTitle').textContent = p.name;
+  document.getElementById('passBank').textContent  = p.bank;
+  stampzone.innerHTML = p.machine
+    ? `<div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--machine);border:1.5px dashed var(--machine);padding:16px 18px;border-radius:3px;text-align:center;line-height:1.7">NO HFCA SEAL<br>AUTONOMOUS AGENT PRODUCT</div>`
+    : `<div class="bigseal">${seal(sealColor[p.tier], sealInner[p.tier], 148)}</div>`;
+  document.getElementById('passGrid').innerHTML = [
+    ['Certificate no.', p.cert],
+    ['Status',          p.since],
+    ['Last inspection', p.audit],
+    ['Accountability',  p.liability],
+  ].map(([k,v])=>`<div class="pass-row"><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+  const makersSect = document.getElementById('makersSect');
+  if(p.makers.length){
+    makersSect.style.display='block';
+    document.getElementById('makersHead').textContent=`The humans behind this product`;
+    document.getElementById('makers').innerHTML=p.makers.map(([n,r,h])=>
+      `<div class="maker"><div>${n} <span>· ${r}</span></div><div class="hrs">${h}</div></div>`).join('');
+  } else { makersSect.style.display='none'; }
+  document.getElementById('carbonPanel').innerHTML=
+    `<h4>Per-account footprint · HFCA method 7</h4>`+
+    p.carbonRows.map(([k,v])=>`<div class="cnum"><span>${k}</span><b>${v}</b></div>`).join('')+
+    `<p class="cnote">${p.carbonNote}</p>`;
+  registryOk.classList.remove('show');
+  // Show book button only for certified (non-AI) products
+  if(!p.machine && advisorData[p.id]){
+    bookBtn.classList.add('visible');
+  } else {
+    bookBtn.classList.remove('visible');
+  }
+  // Show "Get" button only for the AI product
+  const getAiBtn = document.getElementById('getAiBtn');
+  if(p.machine){
+    getAiBtn.classList.add('visible');
+  } else {
+    getAiBtn.classList.remove('visible');
+  }
+  scrim.classList.add('open');
+  const pass = document.getElementById('passport');
+  pass.classList.remove('stamped');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>pass.classList.add('stamped')));
+  document.getElementById('closebtn').focus();
+}
+document.getElementById('closebtn').addEventListener('click',()=>scrim.classList.remove('open'));
+scrim.addEventListener('click',e=>{ if(e.target===scrim) scrim.classList.remove('open'); });
+document.getElementById('verifyBtn').addEventListener('click',()=>registryOk.classList.add('show'));
+bookBtn.addEventListener('click',()=>{
+  if(currentProduct) openBooking(currentProduct);
+});
+document.getElementById('getAiBtn').addEventListener('click',()=>{
+  if(currentProduct) openAiFlow(currentProduct);
+});
+
+/* ================================================
+   BOOKING SYSTEM
+   ================================================ */
+const TIME_SLOTS    = ['09:00','10:30','13:00','14:30','16:00'];
+const CONSULT_TYPES = ['In-person','Video call','Phone'];
+const DAY_SHORT     = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DAY_LONG      = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTH_SHORT   = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const MONTH_LONG    = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+// App world date: April 14, 2036 (Tuesday)
+const APP_TODAY = new Date(2036, 3, 14);
+
+function getBookingDates(){
+  const dates = [];
+  const d = new Date(APP_TODAY);
+  d.setDate(d.getDate() + 1); // start tomorrow
+  while(dates.length < 10){
+    if(d.getDay() !== 0 && d.getDay() !== 6) dates.push(new Date(d));
+    d.setDate(d.getDate() + 1);
+  }
+  return dates;
+}
+
+function generateRef(){
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+  let r = 'HCA-2036-';
+  for(let i=0;i<6;i++) r += chars[Math.floor(Math.random()*chars.length)];
+  return r;
+}
+
+let bookState = { product:null, date:null, time:null, type:null };
+
+function openBooking(product){
+  bookState = { product, date:null, time:null, type:null };
+  renderBookingForm();
+  document.getElementById('bookScrim').classList.add('open');
+  document.getElementById('bookClosebtn').focus();
+}
+
+function renderBookingForm(){
+  const { product } = bookState;
+  const adv = advisorData[product.id];
+  const dates = getBookingDates();
+
+  document.getElementById('bookContent').innerHTML = `
+    <p class="pass-eyebrow" id="bookModalTitle">HFCA · Human Advisory Service</p>
+    <h2 class="pass-title" style="font-size:22px;margin-top:6px;max-width:280px">Book Consultation</h2>
+    <p class="pass-bank">${product.name} · ${product.bank}</p>
+
+    <div class="mandate-notice">
+      <strong>2034 Human Finance Advisory Act</strong>
+      Holders of HFCA-certified products are entitled to — and may be required to attend —
+      a consultation with a licensed human advisor before proceeding. This appointment cannot
+      be conducted or substituted by an automated agent.
+    </div>
+
+    <p class="book-head">Your assigned advisor</p>
+    <div class="advisor-card">
+      <div class="advisor-avatar">${adv.initials}</div>
+      <div>
+        <div class="advisor-name">${adv.name}</div>
+        <div class="advisor-meta">${adv.role} · ${adv.lic}</div>
+        <div class="advisor-status">Available next ${dates.length} business days</div>
+      </div>
+    </div>
+
+    <p class="book-head">Select a date</p>
+    <div class="date-grid" id="dateGrid">
+      ${dates.map((d,i)=>`
+        <button class="datechip" data-idx="${i}" aria-label="${DAY_LONG[d.getDay()]} ${d.getDate()} ${MONTH_LONG[d.getMonth()]}">
+          <span class="day-abbr">${DAY_SHORT[d.getDay()]}</span>
+          ${d.getDate()} ${MONTH_SHORT[d.getMonth()]}
+        </button>`).join('')}
+    </div>
+
+    <p class="book-head">Select a time</p>
+    <div class="time-grid" id="timeGrid">
+      ${TIME_SLOTS.map(t=>`<button class="timechip" data-time="${t}">${t}</button>`).join('')}
+    </div>
+
+    <p class="book-head">Consultation type</p>
+    <div class="type-grid" id="typeGrid">
+      ${CONSULT_TYPES.map(t=>`<button class="typechip" data-type="${t}">${t}</button>`).join('')}
+    </div>
+
+    <button class="book-confirm-btn" id="confirmBtn">Confirm booking</button>
+    <p class="book-error" id="bookError">Select a date, time, and consultation type to continue.</p>
+  `;
+
+  // Wire up date chips
+  document.querySelectorAll('.datechip').forEach((el,i)=>{
+    el.addEventListener('click',()=>{
+      bookState.date = getBookingDates()[i];
+      document.querySelectorAll('.datechip').forEach((c,j)=>c.classList.toggle('selected',i===j));
+      updateBookingBtn();
+    });
+  });
+
+  // Wire up time chips
+  document.querySelectorAll('.timechip').forEach(el=>{
+    el.addEventListener('click',()=>{
+      bookState.time = el.dataset.time;
+      document.querySelectorAll('.timechip').forEach(c=>c.classList.toggle('selected',c.dataset.time===el.dataset.time));
+      updateBookingBtn();
+    });
+  });
+
+  // Wire up type chips
+  document.querySelectorAll('.typechip').forEach(el=>{
+    el.addEventListener('click',()=>{
+      bookState.type = el.dataset.type;
+      document.querySelectorAll('.typechip').forEach(c=>c.classList.toggle('selected',c.dataset.type===el.dataset.type));
+      updateBookingBtn();
+    });
+  });
+
+  document.getElementById('confirmBtn').addEventListener('click', handleConfirm);
+}
+
+function updateBookingBtn(){
+  const btn = document.getElementById('confirmBtn');
+  if(!btn) return;
+  btn.classList.toggle('ready', !!(bookState.date && bookState.time && bookState.type));
+}
+
+function handleConfirm(){
+  if(!bookState.date || !bookState.time || !bookState.type){
+    document.getElementById('bookError').classList.add('show');
+    return;
+  }
+  renderConfirmation();
+}
+
+function renderConfirmation(){
+  const { product, date, time, type } = bookState;
+  const adv = advisorData[product.id];
+  const ref = generateRef();
+  const dateStr = `${DAY_LONG[date.getDay()]}, ${date.getDate()} ${MONTH_LONG[date.getMonth()]} 2036`;
+
+  document.getElementById('bookContent').innerHTML = `
+    <div class="confirm-screen">
+      <div class="confirm-badge">
+        <span class="confirm-tick">✓</span>
+        HFCA · Verified human appointment
+      </div>
+
+      <p class="confirm-ref-label">Booking reference</p>
+      <p class="confirm-ref">${ref}</p>
+      <p class="confirm-desc">
+        A certified human advisor will contact you within one business day to confirm.
+        Under the 2034 Human Finance Advisory Act, this consultation cannot be
+        conducted by an automated agent.
+      </p>
+
+      <dl class="confirm-rows">
+        ${[
+          ['Advisor',   adv.name],
+          ['Licence',   adv.lic],
+          ['Product',   product.name],
+          ['Date',      dateStr],
+          ['Time',      time],
+          ['Type',      type],
+          ['Status',    'Pending advisor confirmation'],
+          ['Issued',    'Tue 14 Apr 2036 · 07:41'],
+        ].map(([k,v])=>`<div class="confirm-row"><dt>${k}</dt><dd>${v}</dd></div>`).join('')}
+      </dl>
+
+      <button class="confirm-done-btn" id="bookDoneBtn">Done</button>
+      <p class="confirm-cal-note">A calendar invite will be added to your ButterCup wallet once confirmed.</p>
+    </div>
+  `;
+
+  document.getElementById('bookDoneBtn').addEventListener('click', closeBooking);
+  document.getElementById('bookDoneBtn').focus();
+}
+
+function closeBooking(){
+  document.getElementById('bookScrim').classList.remove('open');
+}
+
+/* booking modal close handlers */
+document.getElementById('bookClosebtn').addEventListener('click', closeBooking);
+document.getElementById('bookScrim').addEventListener('click', e=>{
+  if(e.target===document.getElementById('bookScrim')) closeBooking();
+});
+
+/* ================================================
+   AI "GET" FLOW
+   ================================================ */
+const AI_LOG_STEPS = [
+  { label:'Initialising agent cluster…',          dur:420 },
+  { label:'Profiling identity node ButterCup…',   dur:380 },
+  { label:'Querying 1,840 data brokers…',         dur:560 },
+  { label:'Running credit inference (v9.4)…',     dur:490 },
+  { label:'Repricing product against live index…', dur:310 },
+  { label:'Generating synthetic term sheet…',     dur:280 },
+  { label:'Flagging compute carbon footprint…',   dur:200, warn:true },
+  { label:'Bypassing human review layer…',        dur:340, warn:true },
+  { label:'Decision sealed.',                     dur:180 },
+];
+
+function generateAiRef(){
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
+  let r='PFA-';
+  for(let i=0;i<9;i++) r+=chars[Math.floor(Math.random()*chars.length)];
+  return r;
+}
+
+function openAiFlow(product){
+  document.getElementById('aiContent').innerHTML = `
+    <p class="ai-eyebrow" id="aiModalTitle">Pulse Financial Agents · Autonomous Origination</p>
+    <h2 class="ai-title">Pulse Instant Credit</h2>
+    <p class="ai-sub">Autonomous product · No human author of record</p>
+
+    <div class="ai-progress-wrap">
+      <div class="ai-progress-label"><span id="aiStepLabel">Preparing…</span><span id="aiPct">0%</span></div>
+      <div class="ai-progress-track"><div class="ai-progress-bar" id="aiBar"></div></div>
+    </div>
+
+    <div class="ai-log" id="aiLog"></div>
+
+    <div class="ai-disclosure" id="aiDisclosure" style="display:none">
+      <strong>Provenance Accord · mandatory disclosure</strong>
+      This product was originated, priced, and approved entirely by autonomous agents. 
+      No named human reviewed or carries liability for this decision. Compute carbon: 
+      1,200 g CO₂e per decision. Product terms may change without human notice. 
+      Average product lifespan: 41 days. Avg. model confidence: 0.74.
+    </div>
+
+    <button class="ai-accept-btn" id="aiAcceptBtn">Accept terms &amp; proceed</button>
+  `;
+  document.getElementById('aiScrim').classList.add('open');
+  document.getElementById('aiClosebtn').focus();
+  runAiSequence(product);
+}
+
+function runAiSequence(product){
+  const bar   = document.getElementById('aiBar');
+  const log   = document.getElementById('aiLog');
+  const label = document.getElementById('aiStepLabel');
+  const pct   = document.getElementById('aiPct');
+  const total = AI_LOG_STEPS.reduce((s,x)=>s+x.dur, 0);
+  let elapsed = 0;
+  let step = 0;
+
+  function next(){
+    if(step >= AI_LOG_STEPS.length){
+      // all done
+      const p = Math.round((elapsed/total)*100);
+      bar.style.width = '100%';
+      pct.textContent = '100%';
+      label.textContent = 'Decision sealed.';
+      // show disclosure + accept btn
+      const disc = document.getElementById('aiDisclosure');
+      const acceptBtn = document.getElementById('aiAcceptBtn');
+      if(disc) disc.style.display='block';
+      if(acceptBtn){
+        acceptBtn.classList.add('show');
+        acceptBtn.addEventListener('click', ()=>renderAiApproved(product), {once:true});
+      }
+      return;
+    }
+    const s = AI_LOG_STEPS[step];
+    elapsed += s.dur;
+    const progress = Math.round((elapsed/total)*100);
+
+    // add log line
+    const lineEl = document.createElement('span');
+    lineEl.className = 'line active' + (s.warn?' warn':'');
+    lineEl.innerHTML = `> ${s.label}<span class="cursor"></span>`;
+    log.appendChild(lineEl);
+    log.scrollTop = log.scrollHeight;
+
+    label.textContent = s.label;
+    bar.style.width = progress+'%';
+    pct.textContent = progress+'%';
+
+    setTimeout(()=>{
+      // mark done, remove cursor
+      lineEl.className = 'line done' + (s.warn?' warn':'');
+      lineEl.innerHTML = `<span style="color:#3A3A3A;margin-right:4px">✓</span>${s.label}`;
+      step++;
+      next();
+    }, s.dur);
+  }
+  next();
+}
+
+function renderAiApproved(product){
+  const ref = generateAiRef();
+  document.getElementById('aiContent').innerHTML = `
+    <div class="ai-approved">
+      <div class="ai-approved-badge">⚡ AUTO-APPROVED · 0 humans involved</div>
+
+      <p class="ai-ref-label">Agent reference</p>
+      <p class="ai-ref">${ref}</p>
+      <p class="ai-confirm-desc">
+        Decision generated by Pulse agent cluster v9.4 in 41 ms. No human reviewed
+        this outcome. Terms are valid for 72 hours and may be repriced at any time
+        by the originating agent without notice.
+      </p>
+
+      <dl class="ai-confirm-rows">
+        ${[
+          ['Product',       product.name],
+          ['Originator',    'Pulse Financial Agents · autonomous'],
+          ['Rate',          '3.70% APR (repriced hourly)'],
+          ['Decision',      'Approved · confidence 0.74'],
+          ['Compute CO₂e', '1,200 g per decision'],
+          ['Human author',  'None · no liability holder'],
+          ['Valid until',   'Wed 17 Apr 2036 · 07:41'],
+          ['Provenance',    '2033 Accord · auto-disclosure'],
+        ].map(([k,v])=>`<div class="ai-confirm-row"><dt>${k}</dt><dd>${v}</dd></div>`).join('')}
+      </dl>
+
+      <button class="ai-done-btn" id="aiDoneBtn">Done</button>
+      <p class="ai-footnote">
+        No calendar invite. No human will contact you.<br>
+        Queries resolved by agent · avg. response 23 ms
+      </p>
+    </div>
+  `;
+  document.getElementById('aiDoneBtn').addEventListener('click', closeAiFlow);
+  document.getElementById('aiDoneBtn').focus();
+}
+
+function closeAiFlow(){
+  document.getElementById('aiScrim').classList.remove('open');
+}
+
+/* AI modal close handlers */
+document.getElementById('aiClosebtn').addEventListener('click', closeAiFlow);
+document.getElementById('aiScrim').addEventListener('click', e=>{
+  if(e.target===document.getElementById('aiScrim')) closeAiFlow();
+});
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){
+    if(document.getElementById('aiScrim').classList.contains('open')){
+      closeAiFlow();
+    } else if(document.getElementById('bookScrim').classList.contains('open')){
+      closeBooking();
+    } else {
+      scrim.classList.remove('open');
+    }
+  }
+});
+
+render();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"f0f03d0605bf45f1a3b17cf7d5e6861f"}' crossorigin="anonymous"></script>
+</body>
+</html>
