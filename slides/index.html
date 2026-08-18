@@ -57,6 +57,11 @@
   .seal.hl{border-color:var(--blue);color:var(--blue);background:rgba(45,79,161,.07)}
   .seal.none{border-color:var(--ink-soft);color:var(--ink-soft);border-style:dashed}
 
+  .force-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2vh 1.5vw;align-content:center}
+  .force{border:1px solid var(--rule);border-radius:8px;padding:1.3vh 1.1rem;background:rgba(255,255,255,.35)}
+  .force .fl{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
+  .force .fv{font-size:clamp(.82rem,1.25vw,1rem);line-height:1.4;color:var(--ink-soft)}
+  .force .fv strong{color:var(--ink)}
   .stat-row{display:flex;gap:3vw;margin-top:3.5vh}
   .stat{border-left:3px solid var(--gold);padding-left:1.2rem}
   .stat .n{font-family:'Young Serif',serif;font-size:clamp(1.8rem,3.6vw,3rem);color:var(--ink)}
@@ -107,22 +112,24 @@
 
 <!-- 2 · THE DESIGN WE KILL -->
 <section class="slide" data-time="0:45" data-speaker="Speaker A"
-  data-notes="The design we say goodbye to is the human financial advisor — and with them, the human-made financial product. Not because of bad technology. Because of macro forces. AI agents are cheaper, faster, and always available. This is already happening. AI already approves loans with almost no human involved. Banks already replace advisors with chatbots — and the CFPB found these chatbots trap customers in doom loops, with no way out. Thirteen trillion dollars may leave traditional banks by 2030. By 2036, the human in finance is not normal anymore. So how did we find this? Through our scan.">
+  data-notes="The design we say goodbye to is the human financial advisor — and with them, the human-made financial product. Not because of bad technology. Because every macro domain pushes in the same direction. Social: 71% of consumers would welcome an AI assistant in their bank app. Technological: AI already approves loans with almost no human involved. Economic: thirteen trillion dollars may leave traditional banks by 2030. Environmental: banking is moving into energy-hungry data centers. Legal: regulators already write rules for AI lending. Ethical: chatbots trap customers in doom loops. By 2036, the human in finance is not normal anymore. Let me show you how we scanned all of this.">
   <div class="kicker">The design that becomes irrelevant</div>
   <h2>By 2036, no human designs, prices,<br>or stands behind your money.</h2>
-  <div class="body-grid">
+  <div class="body-grid" style="grid-template-columns:2fr 3fr">
     <div>
-      <p class="lede">Our chosen design: the <strong>human financial advisor</strong> — and with them, the human-made financial product. Not obsolete for technical reasons, but pushed out by <em class="gold">macro forces</em>.</p>
-      <ul class="pts">
-        <li>AI agents already approve loans, adjust credit limits, flag accounts — with minimal human involvement <strong>(KPMG&nbsp;2026, Accenture&nbsp;2026)</strong></li>
-        <li>Banks replace advisors with chatbots that trap customers in unresolvable <strong>"doom loops" (CFPB&nbsp;2023)</strong></li>
-        <li>The "10× bank": one person supervising a fleet of agents</li>
-      </ul>
+      <p class="lede">Our chosen design: the <strong>human financial advisor</strong> — and with them, the human-made financial product.<br><br>
+      Not obsolete for technical reasons: <em class="gold">every macro domain</em> pushes the same direction.</p>
+      <div class="stat-row" style="margin-top:3vh">
+        <div class="stat"><div class="n">→ 2036</div><div class="l">the human in finance is the anomaly, not the default</div></div>
+      </div>
     </div>
-    <div class="stat-row" style="flex-direction:column;gap:3vh">
-      <div class="stat"><div class="n">$13T</div><div class="l">could shift away from traditional banks to alternative rails by 2030</div></div>
-      <div class="stat"><div class="n">71%</div><div class="l">of consumers would welcome an AI assistant in their banking app</div></div>
-      <div class="stat"><div class="n">→ 2036</div><div class="l">the human in finance is the anomaly, not the default</div></div>
+    <div class="force-grid">
+      <div class="force"><div class="fl">Social</div><div class="fv"><strong>71%</strong> of consumers would welcome an AI assistant in their banking app</div></div>
+      <div class="force"><div class="fl">Technological</div><div class="fv">AI agents already approve loans, adjust limits, flag accounts <strong>(KPMG, Accenture)</strong></div></div>
+      <div class="force"><div class="fl">Economic</div><div class="fv"><strong>$13T</strong> could shift from traditional banks to alternative rails by 2030</div></div>
+      <div class="force"><div class="fl">Environmental</div><div class="fv">Banking migrates into <strong>energy-hungry</strong> data centers and AI models</div></div>
+      <div class="force"><div class="fl">Political · Legal</div><div class="fv">Regulators already write rules for AI lending — the <strong>EU AI Act</strong> treats it as high-risk reality</div></div>
+      <div class="force"><div class="fl">Ethical</div><div class="fv">Chatbots trap customers in <strong>"doom loops" (CFPB 2023)</strong>; the "10× bank" shrinks human staff</div></div>
     </div>
   </div>
   <div class="footer"><span>01 · Obsolescence</span><span class="spk">Speaker A · 0:45</span></div>
@@ -130,7 +137,7 @@
 
 <!-- 3 · STEEPLE -->
 <section class="slide" data-time="1:00" data-speaker="Speaker A"
-  data-notes="We started with a STEEPLE scan. We looked at all seven domains — social, technological, economic, environmental, political, legal, and ethical. Every note on this board has a real source and a date — from KPMG, Accenture, the CFPB, the Federal Reserve, and the EU AI Act. From this scan, we chose three forces. First, technological: AI agents already work inside everyday apps that offer loans and payments. This is called embedded finance. Second, ethical: when an AI makes the decision, nobody knows who is responsible. Third, environmental: every AI decision uses energy, and that carbon cost is hidden. These three forces meet at one point. That point is our signal.">
+  data-notes="All of that evidence came from our STEEPLE scan, across all seven domains. Every note on this board has a real source and a date — from KPMG, Accenture, the CFPB, the Federal Reserve, and the EU AI Act. From this scan, we chose three forces to develop further. First, technological: AI agents already work inside everyday apps that offer loans and payments. This is called embedded finance. Second, ethical: when an AI makes the decision, nobody knows who is responsible. Third, environmental: every AI decision uses energy, and that carbon cost is hidden. These three forces meet at one point. That point is our signal.">
   <div class="kicker">Step 1 · STEEPLE scan</div>
   <h2>Seven domains scanned.<br>Three forces chosen.</h2>
   <div class="body-grid wide-img">
