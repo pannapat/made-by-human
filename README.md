@@ -49,9 +49,11 @@ Four tiers, modeled on organic food labeling — with real enforcement (annual s
 | **HUMAN LED** | AI drafts and analyzes, but a named *author of record* can reconstruct every decision and carries professional liability. |
 | **No seal** | Presumed machine-made; must display its automated status and compute-carbon figure. The absence of a label is itself a label. |
 
-### Provenance — the certified finance marketplace
+The certification system itself is the service design. **Provenance**, the marketplace app below, is a use case built to show the seals working in an everyday decision.
 
-A working, clickable prototype ([open it here](prototype/)). Filter the shelf to *Human-made only*, open a product's **Provenance Passport** — certificate number, audit date, and the nine named humans who made it — check its compute-carbon disclosure, and book the one thing no machine-grown product can offer: a mandatory human consultation.
+### Provenance — the seals in use
+
+A working, clickable demo ([open it here](prototype/)). Filter the shelf to *Human-made only*, open a product's **Provenance Passport** — certificate number, audit date, and the nine named humans who made it — check its compute-carbon disclosure, and book the one thing no machine-grown product can offer: a mandatory human consultation.
 
 <p align="center">
   <img src="assets/app-passport.png" alt="Provenance Passport" width="23%">

@@ -46,7 +46,7 @@ The design fiction is made tangible through the HFCA's certification system — 
 
 ## 6 · Design move
 
-The redesign is **Provenance**, a certified finance marketplace, experienced through the persona **ButterCup** (50, Gothenburg, housing retrofit co-op lead) — a member of the pro-human, environmentally conscious cohort who reads labels, not prospectuses. Her future needs are each justified by present-day evidence: CFPB doom-loops (guaranteed human access), KPMG/Accenture agentic-AI lending (named liability), SoFi responsibility-confusion (provenance), and the emerging norm of AI-content labeling.
+The redesign is the **HFCA certification system** — the seals, the audit regime, and the public registry. **Provenance**, a certified finance marketplace, is the use case we built to demonstrate the seals in action, experienced through the persona **ButterCup** (50, Gothenburg, housing retrofit co-op lead) — a member of the pro-human, environmentally conscious cohort who reads labels, not prospectuses. Her future needs are each justified by present-day evidence: CFPB doom-loops (guaranteed human access), KPMG/Accenture agentic-AI lending (named liability), SoFi responsibility-confusion (provenance), and the emerging norm of AI-content labeling.
 
 ![Storyboard — The Slow Mortgage, a Tuesday in 2036](../assets/storyboard.png)
 
